@@ -10,7 +10,7 @@ const ProductRead = lazy(() => import("../pages/products/ReadPage"))
 
 const ProductModify = lazy(() => import("../pages/products/ModifyPage"))
 
-const productsRouther = () => {
+const productsRouter = () => {
     return [
         {
             path: 'list',
@@ -35,4 +35,4 @@ const productsRouther = () => {
     ]
 }
 
-export default productsRouther;
+export default productsRouter;
