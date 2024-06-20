@@ -1,5 +1,6 @@
 import { useState } from "react"
 import useCustomLogin from "../../hooks/useCustomLogin"
+import KakaoLoginComponent from "./KakaoLoginComponent"
 const initState = {
     email: '',
     pw: ''
@@ -82,6 +83,7 @@ const LoginComponent = () => {
                     </div>
                 </div>
             </div>
+            <KakaoLoginComponent/>
         </div>
     );
 }

@@ -1,8 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { loginPost } from "../api/memberApi";
+import { getCookie, removeCookie, setCookie } from "../util/cookieUtil";
 
 const initState = {
     email: '',
+}
+
+const loadMemberCookie = () =>{
+    const memberInfo = getCookie('member')
+
+
+
+    return memberInfo
 }
 
 export const loginPostAsync = createAsyncThunk('loginPostAsync', (param) => loginPost(param));
@@ -11,7 +20,8 @@ export const loginPostAsync = createAsyncThunk('loginPostAsync', (param) => logi
 
 const loginSlice = createSlice({
     name: 'LoginSlice',
-    initialState: initState,
+    // 초기값을 쿠키가 있는경우와 없는 경우를 설정
+    initialState: loadMemberCookie() || initState,
     reducers: {
         login: (state, action) => {
             console.log("login......", action);
@@ -22,12 +32,21 @@ const loginSlice = createSlice({
         logout: () => {
             console.log("logout......")
 
-            return { email: '' }
+            removeCookie('member')
+            return { ...initState }
         }
     },
     extraReducers: (builder) => {
         builder.addCase(loginPostAsync.fulfilled, (state, action) => {
             const payload = action.payload
+
+            // 로그인 됐을때 쿠키 만들기
+            if(!payload.error){
+                setCookie("member", JSON.stringify(payload),1)
+            }
+
+
+
             return payload
         })
             .addCase(loginPostAsync.pending, (state, action) => {
