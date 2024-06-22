@@ -1,0 +1,21 @@
+import React from 'react'
+import useCustomLogin from '../../hooks/useCustomLogin';
+
+function CartComponent() {
+    
+const {isLogin,loginState} = useCustomLogin();
+
+  return (
+    <div className='w-full'>
+        {isLogin ?
+        <div>
+            {loginState.username}
+        </div>
+        :
+        <div></div>
+    }
+    </div>
+  )
+}
+
+export default CartComponent
