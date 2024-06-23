@@ -10,6 +10,8 @@ export const postChangeCartAsync = createAsyncThunk('postCartItemAsync',
     return postChangeCart(param)
 })
 
+const initState = []
+
 const cartSlice = createSlice({
     name:'cartSlice',
     initialState: initState,
